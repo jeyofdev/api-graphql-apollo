@@ -67,3 +67,6 @@ $RECYCLE.BIN/
 
 # production
 dist/
+
+# environnement
+.env
