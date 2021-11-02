@@ -1,9 +1,22 @@
 import { ApolloServer, gql } from 'apollo-server';
 import dotenv from 'dotenv';
+import mongoose from 'mongoose';
 
 dotenv.config();
 
 const PORT = process.env.PORT || 4000;
+const { MONGO_URL } = process.env;
+
+if (!MONGO_URL) {
+  throw Error('A MONGO_URL must be provided in environment.');
+}
+
+// Connect MongoDb
+const connectOptions = { autoIndex: true };
+mongoose
+  .connect(<string>process.env.MONGO_URL, connectOptions)
+  .then(() => console.log('Connected to database MongoDB'))
+  .catch((err) => console.log(err));
 
 const typeDefs = gql`
   type Query {
