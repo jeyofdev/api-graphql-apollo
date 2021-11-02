@@ -12,5 +12,7 @@ module.exports = {
     tsconfigRootDir: __dirname,
   },
   plugins: ['@typescript-eslint', 'prettier'],
-  rules: {},
+  rules: {
+    'class-methods-use-this': 0,
+  },
 };
