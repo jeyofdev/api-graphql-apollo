@@ -2,6 +2,7 @@ import { Resolver, Query, Mutation, Args } from 'type-graphql';
 import MovieModel, { Movie } from '../../model/Movie.model.js';
 import AddMovieInput from './AddMovieInput.js';
 import DeleteMovieInput from './DeleteMovieInput.js';
+import UpdateMovieInput from './UpdateMovieInput.js';
 
 @Resolver(Movie)
 class MovieResolver {
@@ -26,6 +27,33 @@ class MovieResolver {
       type,
     });
     const result = await movie.save();
+    return result;
+  }
+
+  // UPDATE
+  @Mutation(() => Movie)
+  async updateMovie(
+    @Args()
+    {
+      initialTitle,
+      newTitle,
+      director,
+      year,
+      rating,
+      duration,
+      type,
+    }: UpdateMovieInput
+  ) {
+    const movie = await MovieModel.findOne({ name: initialTitle });
+    if (!movie) {
+      throw Error('User does not exist.');
+    }
+    const result = await MovieModel.findOneAndUpdate(
+      { name: initialTitle },
+      { name: newTitle, director, year, rating, duration, type },
+      { returnOriginal: false }
+    );
+
     return result;
   }
 

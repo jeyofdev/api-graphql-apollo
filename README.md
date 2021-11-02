@@ -113,6 +113,32 @@ mutation($title: String!, $director: String!, $year: Int!, $rating: Int!, $durat
 }
 ```
 
+Update movie
+
+```javascript
+mutation($initialTitle: String!,$newTitle: String,$director: String,$year: Int,$rating: Int,$duration: Int,$type: String) {
+  updateMovie(initialTitle: $initialTitle, newTitle: $newTitle, director: $director, year: $year, rating: $rating, duration: $duration, type: $type) {
+    title
+    director
+    year
+    rating
+    duration
+    type
+  }
+}
+```
+
+```javascript
+{
+  "initialTitle": "Jurassic Park",
+  "director": "Steven Spielberg",
+  "year": 1993,
+  "rating": 9,
+  "duration": 127,
+  "type": "Adventure"
+}
+```
+
 Delete movie
 
 ```javascript
