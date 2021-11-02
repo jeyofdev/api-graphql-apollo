@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { Field, ID, ObjectType } from 'type-graphql';
+import { Field, ID, Int, ObjectType } from 'type-graphql';
 
 const { model, Schema } = mongoose;
 
@@ -11,13 +11,13 @@ class Movie {
   @Field()
   director!: string;
 
-  @Field()
+  @Field(() => Int)
   year!: number;
 
-  @Field()
+  @Field(() => Int)
   rating!: number;
 
-  @Field()
+  @Field(() => Int)
   duration!: number;
 
   @Field()

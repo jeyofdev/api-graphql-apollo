@@ -30,6 +30,7 @@
   "homepage": "https://github.com/jeyofdev/api-graphql-apollo#readme",
   "dependencies": {
     "apollo-server": "^3.4.0",
+    "class-validator": "^0.13.1",
     "dotenv": "^10.0.0",
     "graphql": "^15.6.1",
     "mongoose": "^6.0.12",

@@ -74,7 +74,7 @@ $ yarn start
 
 Get all movies
 
-```
+```javascript
 query {
   Movies {
     title
@@ -84,5 +84,31 @@ query {
     duration
     type
   }
+}
+```
+
+Post new movie
+
+```javascript
+mutation($title: String!, $director: String!, $year: Int!, $rating: Int!, $duration: Int!, $type: String!) {
+  addMovie(title: $title, director: $director, year: $year, rating: $rating, duration: $duration, type: $type) {
+    title
+    director
+    year
+    rating
+    duration
+    type
+  }
+}
+```
+
+```javascript
+{
+  "title": "Jurassic Park",
+    "director": "Steven Spielberg",
+    "year": 1993,
+    "rating": 8.1,
+    "duration": 127,
+    "type": "Adventure"
 }
 ```
