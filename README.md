@@ -112,3 +112,24 @@ mutation($title: String!, $director: String!, $year: Int!, $rating: Int!, $durat
     "type": "Adventure"
 }
 ```
+
+Delete movie
+
+```javascript
+mutation($title: String!) {
+  deleteMovie(title: $title) {
+    title
+    director
+    year
+    rating
+    duration
+    type
+  }
+}
+```
+
+```javascript
+{
+  "title": "Jurassic Park"
+}
+```
