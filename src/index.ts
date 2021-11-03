@@ -2,7 +2,7 @@ import { ApolloServer } from 'apollo-server';
 import dotenv from 'dotenv';
 import { buildSchema } from 'type-graphql';
 import 'reflect-metadata';
-import MovieResolver from './resolvers/movies/Movie.resolver.js';
+import MovieResolver from './resolvers/Movie.resolver.js';
 import Movie from './models/Movie.model.js';
 import { createConnection, getConnectionOptions } from 'typeorm';
 

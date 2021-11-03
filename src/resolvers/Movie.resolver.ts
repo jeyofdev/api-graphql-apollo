@@ -1,8 +1,8 @@
 import { Resolver, Query, Mutation, Args } from 'type-graphql';
-import Movie from '../../models/Movie.model.js';
-import AddMovieInput from './AddMovieInput.js';
-import DeleteMovieInput from './DeleteMovieInput.js';
-import UpdateMovieInput from './UpdateMovieInput.js';
+import Movie from '../models/Movie.model.js';
+import AddMovieInput from '../types/movies/AddMovie.type.js';
+import DeleteMovieInput from '../types/movies/DeleteMovie.type.js';
+import UpdateMovieInput from '../types/movies/UpdateMovie.type.js';
 
 @Resolver(Movie)
 class MovieResolver {
