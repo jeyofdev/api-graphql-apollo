@@ -1,4 +1,4 @@
-# Api Graphql Apollo Mongo
+# Api Graphql Apollo Sqlite
 
 Create a basic API with graphQl
 
@@ -7,10 +7,11 @@ Create a basic API with graphQl
 - ![NodeJS](https://img.shields.io/badge/NODE.JS-black?style=plastic&logo=node.js)
 - ![GraphQL](https://img.shields.io/badge/GraphQL-black?style=plastic&logo=graphql)
 - ![Apollo-GraphQL](https://img.shields.io/badge/ApolloGraphQL-black?style=plastic&logo=apollo-graphql)
-- ![MongoDB](https://img.shields.io/badge/MongoDB-black?style=plastic&logo=Mongodb)
+- ![SQLite](https://img.shields.io/badge/sqlite-black?style=plastic&logo=sqlite)
 - ![EsLint](https://img.shields.io/badge/ESLint-black?style=plastic&logo=eslint)
 - ![TypeScript](https://img.shields.io/badge/typescript-black?style=plastic&logo=typescript)
 - ![Type-graphql](https://img.shields.io/badge/TypeGraphQL-black?style=plastic)
+- ![Typeorm](https://img.shields.io/badge/Typeorm-black?style=plastic)
 
 ## Getting starting
 
@@ -36,11 +37,10 @@ $ npm install
 Create .env file based on .env.example and modify variables if needed.
 
 ```sh
-# General settings
-PORT=your_port
-
 # Database settings
-MONGO_URL=your_mongodb_url
+TYPEORM_CONNECTION="sqlite"
+TYPEORM_DATABASE="./src/database/sqlite.db"
+TYPEORM_PORT=4000
 ```
 
 ### Scripts
@@ -77,6 +77,7 @@ Get all movies
 ```javascript
 query {
   Movies {
+    id
     title
     director
     year
@@ -92,6 +93,7 @@ Post new movie
 ```javascript
 mutation($title: String!, $director: String!, $year: Int!, $rating: Int!, $duration: Int!, $type: String!) {
   addMovie(title: $title, director: $director, year: $year, rating: $rating, duration: $duration, type: $type) {
+    id
     title
     director
     year
@@ -116,8 +118,9 @@ mutation($title: String!, $director: String!, $year: Int!, $rating: Int!, $durat
 Update movie
 
 ```javascript
-mutation($initialTitle: String!,$newTitle: String,$director: String,$year: Int,$rating: Int,$duration: Int,$type: String) {
-  updateMovie(initialTitle: $initialTitle, newTitle: $newTitle, director: $director, year: $year, rating: $rating, duration: $duration, type: $type) {
+mutation($id: Int!, $title: String, $director: String, $year: Int, $rating: Int, $duration: Int, $type: String) {
+  updateMovie(id: $id, title: $title, director: $director, director: $director, year: $year, rating: $rating, duration: $duration, type: $type) {
+    id
     title
     director
     year
@@ -130,19 +133,16 @@ mutation($initialTitle: String!,$newTitle: String,$director: String,$year: Int,$
 
 ```javascript
 {
-  "initialTitle": "Jurassic Park",
-  "director": "Steven Spielberg",
-  "year": 1993,
-  "rating": 9,
-  "duration": 127,
-  "type": "Adventure"
+  "id": 2,
+  "rating": 10,
+  "type": "Action"
 }
 ```
 
 Delete movie
 
 ```javascript
-mutation($title: String!) {
+mutation($title: Int!) {
   deleteMovie(title: $title) {
     title
     director
@@ -156,6 +156,6 @@ mutation($title: String!) {
 
 ```javascript
 {
-  "title": "Jurassic Park"
+  "id": 2
 }
 ```

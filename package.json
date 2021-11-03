@@ -20,7 +20,8 @@
     "nodejs",
     "node",
     "graphql",
-    "apollo"
+    "apollo",
+    "sqlite"
   ],
   "author": "jeyofdev <jgregoire.pro@gmail.com>",
   "license": "ISC",
