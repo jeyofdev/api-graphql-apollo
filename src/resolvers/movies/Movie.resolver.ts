@@ -1,5 +1,5 @@
 import { Resolver, Query, Mutation, Args } from 'type-graphql';
-import MovieModel, { Movie } from '../../model/Movie.model.js';
+import Movie from '../../models/Movie.model.js';
 import AddMovieInput from './AddMovieInput.js';
 import DeleteMovieInput from './DeleteMovieInput.js';
 import UpdateMovieInput from './UpdateMovieInput.js';
@@ -9,7 +9,7 @@ class MovieResolver {
   // GET
   @Query(() => [Movie])
   async Movies() {
-    const users = await MovieModel.find();
+    const users = await Movie.find();
     return users;
   }
 
@@ -18,53 +18,44 @@ class MovieResolver {
   async addMovie(
     @Args() { title, director, year, rating, duration, type }: AddMovieInput
   ) {
-    const movie = new MovieModel({
-      title,
-      director,
-      year,
-      rating,
-      duration,
-      type,
-    });
-    const result = await movie.save();
-    return result;
+    const movie = new Movie();
+    movie.title = title;
+    movie.director = director;
+    movie.year = year;
+    movie.rating = rating;
+    movie.duration = duration;
+    movie.type = type;
+
+    await movie.save();
+    return movie;
   }
 
   // UPDATE
   @Mutation(() => Movie)
   async updateMovie(
     @Args()
-    {
-      initialTitle,
-      newTitle,
-      director,
-      year,
-      rating,
-      duration,
-      type,
-    }: UpdateMovieInput
+    { id, title, director, year, rating, duration, type }: UpdateMovieInput
   ) {
-    const movie = await MovieModel.findOne({ name: initialTitle });
-    if (!movie) {
-      throw Error('User does not exist.');
-    }
-    const result = await MovieModel.findOneAndUpdate(
-      { name: initialTitle },
-      { name: newTitle, director, year, rating, duration, type },
-      { returnOriginal: false }
-    );
+    const movie = await Movie.findOneOrFail({ id });
 
-    return result;
+    await Movie.update(movie, {
+      title: title ?? movie.title,
+      director: director ?? movie.director,
+      year: year ?? movie.year,
+      rating: rating ?? movie.rating,
+      duration: duration ?? movie.duration,
+      type: type ?? movie.type,
+    });
+
+    const updateMovie = await Movie.findOne({ id });
+    return updateMovie;
   }
 
   // DELETE
   @Mutation(() => Movie)
-  async deleteMovie(@Args() { title }: DeleteMovieInput) {
-    const movie = await MovieModel.findOne({ title });
-    if (!movie) {
-      throw Error('Movie does not exist.');
-    }
-    await MovieModel.deleteOne({ title });
+  async deleteMovie(@Args() { id }: DeleteMovieInput) {
+    const movie = await Movie.findOneOrFail({ id });
+    await Movie.remove(movie);
     return movie;
   }
 }

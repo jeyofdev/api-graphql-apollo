@@ -70,3 +70,6 @@ dist/
 
 # environnement
 .env
+
+# database
+database/

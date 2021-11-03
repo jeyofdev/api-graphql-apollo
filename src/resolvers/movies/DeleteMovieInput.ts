@@ -1,9 +1,9 @@
-import { ArgsType, Field } from 'type-graphql';
+import { ArgsType, Field, Int } from 'type-graphql';
 
 @ArgsType()
 class DeleteMovieInput {
-  @Field()
-  title!: string;
+  @Field(() => Int)
+  id!: string;
 }
 
 export default DeleteMovieInput;
