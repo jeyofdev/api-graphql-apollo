@@ -116,6 +116,54 @@ query {
 }
 ```
 
+Get first movie
+
+```javascript
+query {
+  FirstMovie {
+    id
+    title
+    director
+    year
+    rating
+    duration
+    type
+  }
+}
+```
+
+Get last movie
+
+```javascript
+query {
+  LastMovie {
+    id
+    title
+    director
+    year
+    rating
+    duration
+    type
+  }
+}
+```
+
+Get last movie
+
+```javascript
+query($title: String!) {
+  MovieByTitle(title: $title) {
+    id
+    title
+    director
+    year
+    rating
+    duration
+    type
+  }
+}
+```
+
 Post new movie
 
 ```javascript
@@ -135,11 +183,11 @@ mutation($title: String!, $director: String!, $year: Int!, $rating: Int!, $durat
 ```javascript
 {
   "title": "Jurassic Park",
-    "director": "Steven Spielberg",
-    "year": 1993,
-    "rating": 8.1,
-    "duration": 127,
-    "type": "Adventure"
+  "director": "Steven Spielberg",
+  "year": 1993,
+  "rating": 8.1,
+  "duration": 127,
+  "type": "Adventure"
 }
 ```
 

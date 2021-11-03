@@ -8,11 +8,11 @@ class Movie extends BaseEntity {
   @Field(() => ID)
   id!: Number;
 
-  @Column()
+  @Column({ type: 'varchar', length: 255 })
   @Field({ nullable: true })
   title?: string;
 
-  @Column()
+  @Column({ type: 'varchar', length: 100 })
   @Field({ nullable: true })
   director?: string;
 
@@ -28,7 +28,7 @@ class Movie extends BaseEntity {
   @Field(() => Int, { nullable: true })
   duration?: number;
 
-  @Column()
+  @Column({ type: 'varchar', length: 50 })
   @Field({ nullable: true })
   type?: string;
 }
