@@ -8,6 +8,7 @@ Create a basic API with graphQl
 - ![GraphQL](https://img.shields.io/badge/GraphQL-black?style=plastic&logo=graphql)
 - ![Apollo-GraphQL](https://img.shields.io/badge/ApolloGraphQL-black?style=plastic&logo=apollo-graphql)
 - ![SQLite](https://img.shields.io/badge/sqlite-black?style=plastic&logo=sqlite)
+- ![MySQL](https://img.shields.io/badge/mysql-black?style=plastic&logo=mysql)
 - ![EsLint](https://img.shields.io/badge/ESLint-black?style=plastic&logo=eslint)
 - ![TypeScript](https://img.shields.io/badge/typescript-black?style=plastic&logo=typescript)
 - ![Type-graphql](https://img.shields.io/badge/TypeGraphQL-black?style=plastic)
@@ -37,10 +38,37 @@ $ npm install
 Create .env file based on .env.example and modify variables if needed.
 
 ```sh
+# Default settings
+PORT=4000
+```
+
+If you choose database mysql, add :
+
+```sh
+yarn add mysql2
+```
+
+```sh
+# Database settings
+TYPEORM_CONNECTION=mysql
+TYPEORM_HOST=your_db_host
+TYPEORM_USERNAME=your_db_username
+TYPEORM_PASSWORD=your_db_password
+TYPEORM_DATABASE=your_db_name
+TYPEORM_PORT=your_db_port
+```
+
+If you choose database sqlite, add :
+
+```sh
+yarn add sqlite3
+```
+
+```sh
 # Database settings
 TYPEORM_CONNECTION="sqlite"
-TYPEORM_DATABASE="./src/database/sqlite.db"
-TYPEORM_PORT=4000
+TYPEORM_DATABASE="./src/database/db-sqlite.db"
+TYPEORM_PORT=your_db_port
 ```
 
 ### Scripts

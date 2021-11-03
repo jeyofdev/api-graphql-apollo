@@ -72,4 +72,4 @@ dist/
 .env
 
 # database
-database/
+src/database/db-sqlite.db

@@ -11,6 +11,7 @@ dotenv.config();
 const ServerRun = async () => {
   // connection database
   const connectionOptions = await getConnectionOptions();
+
   await createConnection({
     ...connectionOptions,
     entities: [Movie],
@@ -24,7 +25,7 @@ const ServerRun = async () => {
   const server = new ApolloServer({ schema });
 
   // The `listen` method launches a web server.
-  server.listen(process.env.TYPEORM_PORT).then(({ url }) => {
+  server.listen(process.env.PORT).then(({ url }) => {
     console.log(`🚀  Server ready at ${url}`);
   });
 };
