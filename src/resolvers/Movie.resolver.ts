@@ -12,8 +12,8 @@ class MovieResolver {
   // GET all movies
   @Query(() => [Movie])
   async Movies() {
-    const userRepository = getCustomRepository(MovieRepository);
-    const movies = await userRepository.find();
+    const movieRepository = getCustomRepository(MovieRepository);
+    const movies = await movieRepository.find();
 
     return movies;
   }
@@ -21,8 +21,8 @@ class MovieResolver {
   // GET first movie
   @Query(() => Movie)
   async FirstMovie() {
-    const userRepository = getCustomRepository(MovieRepository);
-    const movie = await userRepository.findFirst();
+    const movieRepository = getCustomRepository(MovieRepository);
+    const movie = await movieRepository.findFirst();
 
     return movie;
   }
@@ -30,8 +30,8 @@ class MovieResolver {
   // GET movie
   @Query(() => Movie)
   async MovieByTitle(@Args() { title }: GetMovieByTitle) {
-    const userRepository = getCustomRepository(MovieRepository);
-    const movie = await userRepository.findByTitle(title);
+    const movieRepository = getCustomRepository(MovieRepository);
+    const movie = await movieRepository.findByTitle(title);
 
     return movie;
   }
@@ -39,8 +39,8 @@ class MovieResolver {
   // GET last movie
   @Query(() => Movie)
   async LastMovie() {
-    const userRepository = getCustomRepository(MovieRepository);
-    const movie = await userRepository.findLast();
+    const movieRepository = getCustomRepository(MovieRepository);
+    const movie = await movieRepository.findLast();
 
     return movie;
   }
@@ -50,7 +50,7 @@ class MovieResolver {
   async AddMovie(
     @Args() { title, director, year, rating, duration, type }: AddMovieInput
   ) {
-    const userRepository = getCustomRepository(MovieRepository);
+    const movieRepository = getCustomRepository(MovieRepository);
 
     const movie = new Movie();
     movie.title = title;
@@ -60,7 +60,7 @@ class MovieResolver {
     movie.duration = duration;
     movie.type = type;
 
-    await userRepository.save(movie);
+    await movieRepository.save(movie);
     return movie;
   }
 
@@ -70,7 +70,7 @@ class MovieResolver {
     @Args()
     { id, title, director, year, rating, duration, type }: UpdateMovieInput
   ) {
-    const userRepository = getCustomRepository(MovieRepository);
+    const movieRepository = getCustomRepository(MovieRepository);
 
     const movie = await Movie.findOneOrFail({ id });
 
@@ -83,16 +83,16 @@ class MovieResolver {
       type: type ?? movie.type,
     });
 
-    const updateMovie = await userRepository.findOne({ id });
+    const updateMovie = await movieRepository.findOne({ id });
     return updateMovie;
   }
 
   // DELETE
   @Mutation(() => Movie)
   async DeleteMovie(@Args() { id }: DeleteMovieInput) {
-    const userRepository = getCustomRepository(MovieRepository);
+    const movieRepository = getCustomRepository(MovieRepository);
 
-    const movie = await userRepository.findOneOrFail({ id });
+    const movie = await movieRepository.findOneOrFail({ id });
     await Movie.remove(movie);
     return movie;
   }
