@@ -50,6 +50,8 @@ class MovieResolver {
   async AddMovie(
     @Args() { title, director, year, rating, duration, type }: AddMovieInput
   ) {
+    const userRepository = getCustomRepository(MovieRepository);
+
     const movie = new Movie();
     movie.title = title;
     movie.director = director;
@@ -58,7 +60,7 @@ class MovieResolver {
     movie.duration = duration;
     movie.type = type;
 
-    await movie.save();
+    await userRepository.save(movie);
     return movie;
   }
 
@@ -68,6 +70,8 @@ class MovieResolver {
     @Args()
     { id, title, director, year, rating, duration, type }: UpdateMovieInput
   ) {
+    const userRepository = getCustomRepository(MovieRepository);
+
     const movie = await Movie.findOneOrFail({ id });
 
     await Movie.update(movie, {
@@ -79,14 +83,16 @@ class MovieResolver {
       type: type ?? movie.type,
     });
 
-    const updateMovie = await Movie.findOne({ id });
+    const updateMovie = await userRepository.findOne({ id });
     return updateMovie;
   }
 
   // DELETE
   @Mutation(() => Movie)
   async DeleteMovie(@Args() { id }: DeleteMovieInput) {
-    const movie = await Movie.findOneOrFail({ id });
+    const userRepository = getCustomRepository(MovieRepository);
+
+    const movie = await userRepository.findOneOrFail({ id });
     await Movie.remove(movie);
     return movie;
   }
