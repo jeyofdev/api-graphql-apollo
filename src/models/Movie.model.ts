@@ -1,6 +1,7 @@
 import { Field, ID, Int, ObjectType } from 'type-graphql';
 import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
+console.log('ok');
 @Entity()
 @ObjectType()
 class Movie extends BaseEntity {
