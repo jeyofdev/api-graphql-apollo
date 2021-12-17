@@ -72,7 +72,7 @@ class MovieResolver {
   ) {
     const movieRepository = getCustomRepository(MovieRepository);
 
-    const movie = await Movie.findOneOrFail({ id });
+    const movie = await movieRepository.findOneOrFail({ id });
 
     await Movie.update(movie, {
       title: title ?? movie.title,
@@ -93,8 +93,8 @@ class MovieResolver {
     const movieRepository = getCustomRepository(MovieRepository);
 
     const movie = await movieRepository.findOneOrFail({ id });
-    await Movie.remove(movie);
-    return movie;
+    await movieRepository.remove(movie);
+    return { ...movie, id };
   }
 }
 

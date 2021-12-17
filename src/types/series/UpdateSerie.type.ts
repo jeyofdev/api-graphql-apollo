@@ -1,27 +1,18 @@
 import { ArgsType, Field, Int } from 'type-graphql';
 
 @ArgsType()
-class UpdateMovieInput {
+class UpdateSerieInput {
   @Field(() => Int)
   id!: number;
 
   @Field({ nullable: true })
   title?: string;
 
-  @Field({ nullable: true })
-  director?: string;
-
   @Field(() => Int, { nullable: true })
   year?: number;
 
   @Field(() => Int, { nullable: true })
-  rating?: number;
-
-  @Field(() => Int, { nullable: true })
-  duration?: number;
-
-  @Field({ nullable: true })
-  type?: string;
+  seasons?: number;
 }
 
-export default UpdateMovieInput;
+export default UpdateSerieInput;
