@@ -1,7 +1,7 @@
 import { Resolver, Query, Mutation, Args } from 'type-graphql';
 import { getCustomRepository } from 'typeorm';
 import Serie from '../models/Series.model.js';
-import SerieRepository from '../repositories/serie.repository.js';
+import SerieRepository from '../repositories/Serie.repository.js';
 import AddSerieInput from '../types/series/AddSerie.type.js';
 import DeleteSerieInput from '../types/series/DeleteSerie.type.js';
 import UpdateSerieInput from '../types/series/UpdateSerie.type.js';

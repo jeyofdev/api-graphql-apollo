@@ -3,10 +3,12 @@ import dotenv from 'dotenv';
 import { buildSchema } from 'type-graphql';
 import 'reflect-metadata';
 import { createConnection, getConnectionOptions } from 'typeorm';
-import MovieResolver from './resolvers/Movie.resolver.js';
 import Movie from './models/Movie.model.js';
 import Serie from './models/Series.model.js';
+import Type from './models/Type.model.js';
+import MovieResolver from './resolvers/Movie.resolver.js';
 import SerieResolver from './resolvers/Serie.resolver.js';
+import TypeResolver from './resolvers/Type.resolver.js';
 
 dotenv.config();
 
@@ -16,7 +18,7 @@ const ServerRun = async () => {
 
   await createConnection({
     ...connectionOptions,
-    entities: [Movie, Serie],
+    entities: [Movie, Serie, Type],
     synchronize: true,
     logging: true,
   });
@@ -24,7 +26,7 @@ const ServerRun = async () => {
   console.log('Connected to database');
 
   const schema = await buildSchema({
-    resolvers: [MovieResolver, SerieResolver],
+    resolvers: [MovieResolver, SerieResolver, TypeResolver],
   });
   const server = new ApolloServer({ schema });
 

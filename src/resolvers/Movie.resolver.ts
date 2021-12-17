@@ -1,7 +1,7 @@
 import { Resolver, Query, Mutation, Args } from 'type-graphql';
 import { getCustomRepository } from 'typeorm';
 import Movie from '../models/Movie.model.js';
-import MovieRepository from '../repositories/movie.repository.js';
+import MovieRepository from '../repositories/Movie.repository.js';
 import AddMovieInput from '../types/movies/AddMovie.type.js';
 import DeleteMovieInput from '../types/movies/DeleteMovie.type.js';
 import GetMovieByTitle from '../types/movies/GetMovieByTitle.js';
