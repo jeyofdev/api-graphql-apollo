@@ -12,7 +12,7 @@ class SerieResolver {
   @Query(() => [Serie])
   async Series() {
     const serieRepository = getCustomRepository(SerieRepository);
-    const series = await serieRepository.find();
+    const series = await serieRepository.find({ relations: ['types'] });
 
     return series;
   }
@@ -27,8 +27,11 @@ class SerieResolver {
     serie.year = year;
     serie.seasons = seasons;
 
-    await serieRepository.save(serie);
-    return serie;
+    const newSerie = await serieRepository.save(serie);
+    return serieRepository.findOne(
+      { id: newSerie.id },
+      { relations: ['types'] }
+    );
   }
 
   // UPDATE;
@@ -39,15 +42,22 @@ class SerieResolver {
   ) {
     const serieRepository = getCustomRepository(SerieRepository);
 
-    const serie = await serieRepository.findOneOrFail({ id });
+    const serie = await serieRepository.findOneOrFail(
+      { id },
+      { relations: ['types'] }
+    );
 
-    await serieRepository.update(serie, {
-      title: title ?? serie.title,
-      year: year ?? serie.year,
-      seasons: seasons ?? serie.seasons,
-    });
+    serie.title = title ?? serie.title;
+    serie.year = year ?? serie.year;
+    serie.seasons = seasons ?? serie.seasons;
 
-    const updateSerie = await serieRepository.findOne({ id });
+    await serieRepository.save(serie);
+
+    const updateSerie = await serieRepository.findOne(
+      { id },
+      { relations: ['types'] }
+    );
+
     return updateSerie;
   }
 
@@ -56,7 +66,10 @@ class SerieResolver {
   async DeleteSerie(@Args() { id }: DeleteSerieInput) {
     const serieRepository = getCustomRepository(SerieRepository);
 
-    const serie = await serieRepository.findOneOrFail({ id });
+    const serie = await serieRepository.findOneOrFail(
+      { id },
+      { relations: ['types'] }
+    );
     await serieRepository.remove(serie);
     return { ...serie, id };
   }
