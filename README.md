@@ -4,15 +4,13 @@ Create a basic API with graphQl
 
 ## Features
 
-- ![NodeJS](https://img.shields.io/badge/NODE.JS-black?style=plastic&logo=node.js)
-- ![GraphQL](https://img.shields.io/badge/GraphQL-black?style=plastic&logo=graphql)
-- ![Apollo-GraphQL](https://img.shields.io/badge/ApolloGraphQL-black?style=plastic&logo=apollo-graphql)
-- ![SQLite](https://img.shields.io/badge/sqlite-black?style=plastic&logo=sqlite)
-- ![MySQL](https://img.shields.io/badge/mysql-black?style=plastic&logo=mysql)
-- ![EsLint](https://img.shields.io/badge/ESLint-black?style=plastic&logo=eslint)
-- ![TypeScript](https://img.shields.io/badge/typescript-black?style=plastic&logo=typescript)
-- ![Type-graphql](https://img.shields.io/badge/TypeGraphQL-black?style=plastic)
-- ![Typeorm](https://img.shields.io/badge/Typeorm-black?style=plastic)
+![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
+![GraphQL](https://img.shields.io/badge/-GraphQL-E10098?style=for-the-badge&logo=graphql&logoColor=white)
+![Apollo-GraphQL](https://img.shields.io/badge/-ApolloGraphQL-311C87?style=for-the-badge&logo=apollo-graphql)
+![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)
+![ESLint](https://img.shields.io/badge/ESLint-4B3263?style=for-the-badge&logo=eslint&logoColor=white)
+![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
+![Type-graphql](https://img.shields.io/badge/-TypeGraphQL-%23C04392?style=for-the-badge)
 
 ## Getting starting
 
@@ -96,142 +94,4 @@ Start production server :
 
 ```sh
 $ yarn start
-```
-
-### Queries
-
-Get all movies
-
-```javascript
-query {
-  Movies {
-    id
-    title
-    director
-    year
-    rating
-    duration
-    type
-  }
-}
-```
-
-Get first movie
-
-```javascript
-query {
-  FirstMovie {
-    id
-    title
-    director
-    year
-    rating
-    duration
-    type
-  }
-}
-```
-
-Get last movie
-
-```javascript
-query {
-  LastMovie {
-    id
-    title
-    director
-    year
-    rating
-    duration
-    type
-  }
-}
-```
-
-Get last movie
-
-```javascript
-query($title: String!) {
-  MovieByTitle(title: $title) {
-    id
-    title
-    director
-    year
-    rating
-    duration
-    type
-  }
-}
-```
-
-Post new movie
-
-```javascript
-mutation($title: String!, $director: String!, $year: Int!, $rating: Int!, $duration: Int!, $type: String!) {
-  addMovie(title: $title, director: $director, year: $year, rating: $rating, duration: $duration, type: $type) {
-    id
-    title
-    director
-    year
-    rating
-    duration
-    type
-  }
-}
-```
-
-```javascript
-{
-  "title": "Jurassic Park",
-  "director": "Steven Spielberg",
-  "year": 1993,
-  "rating": 8.1,
-  "duration": 127,
-  "type": "Adventure"
-}
-```
-
-Update movie
-
-```javascript
-mutation($id: Int!, $title: String, $director: String, $year: Int, $rating: Int, $duration: Int, $type: String) {
-  updateMovie(id: $id, title: $title, director: $director, director: $director, year: $year, rating: $rating, duration: $duration, type: $type) {
-    id
-    title
-    director
-    year
-    rating
-    duration
-    type
-  }
-}
-```
-
-```javascript
-{
-  "id": 2,
-  "rating": 10,
-  "type": "Action"
-}
-```
-
-Delete movie
-
-```javascript
-mutation($title: Int!) {
-  deleteMovie(title: $title) {
-    title
-    director
-    year
-    rating
-    duration
-    type
-  }
-}
-```
-
-```javascript
-{
-  "id": 2
-}
 ```

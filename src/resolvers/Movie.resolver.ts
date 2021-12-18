@@ -1,7 +1,7 @@
 import { Resolver, Query, Mutation, Args } from 'type-graphql';
 import { getCustomRepository } from 'typeorm';
 import Movie from '../models/Movie.model.js';
-import MovieRepository from '../repositories/movie.repository.js';
+import MovieRepository from '../repositories/Movie.repository.js';
 import AddMovieInput from '../types/movies/AddMovie.type.js';
 import DeleteMovieInput from '../types/movies/DeleteMovie.type.js';
 import GetMovieByTitle from '../types/movies/GetMovieByTitle.js';
@@ -72,7 +72,7 @@ class MovieResolver {
   ) {
     const movieRepository = getCustomRepository(MovieRepository);
 
-    const movie = await Movie.findOneOrFail({ id });
+    const movie = await movieRepository.findOneOrFail({ id });
 
     await Movie.update(movie, {
       title: title ?? movie.title,
@@ -93,8 +93,8 @@ class MovieResolver {
     const movieRepository = getCustomRepository(MovieRepository);
 
     const movie = await movieRepository.findOneOrFail({ id });
-    await Movie.remove(movie);
-    return movie;
+    await movieRepository.remove(movie);
+    return { ...movie, id };
   }
 }
 

@@ -2,9 +2,15 @@ import { ApolloServer } from 'apollo-server';
 import dotenv from 'dotenv';
 import { buildSchema } from 'type-graphql';
 import 'reflect-metadata';
-import MovieResolver from './resolvers/Movie.resolver.js';
-import Movie from './models/Movie.model.js';
 import { createConnection, getConnectionOptions } from 'typeorm';
+import Movie from './models/Movie.model.js';
+import Serie from './models/Series.model.js';
+import Type from './models/Type.model.js';
+import Episode from './models/Episode.model.js';
+import MovieResolver from './resolvers/Movie.resolver.js';
+import SerieResolver from './resolvers/Serie.resolver.js';
+import TypeResolver from './resolvers/Type.resolver.js';
+import EpisodeResolver from './resolvers/Episode.resolver.js';
 
 dotenv.config();
 
@@ -14,14 +20,16 @@ const ServerRun = async () => {
 
   await createConnection({
     ...connectionOptions,
-    entities: [Movie],
+    entities: [Movie, Serie, Type, Episode],
     synchronize: true,
     logging: true,
   });
 
   console.log('Connected to database');
 
-  const schema = await buildSchema({ resolvers: [MovieResolver] });
+  const schema = await buildSchema({
+    resolvers: [MovieResolver, SerieResolver, TypeResolver, EpisodeResolver],
+  });
   const server = new ApolloServer({ schema });
 
   // The `listen` method launches a web server.
