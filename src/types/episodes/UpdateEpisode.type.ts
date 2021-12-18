@@ -13,6 +13,9 @@ class UpdateEpisodeInput {
 
   @Field({ nullable: true })
   content?: string;
+
+  @Field(() => Int)
+  serieId!: number;
 }
 
 export default UpdateEpisodeInput;

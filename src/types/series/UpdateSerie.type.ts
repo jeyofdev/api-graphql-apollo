@@ -13,6 +13,9 @@ class UpdateSerieInput {
 
   @Field(() => Int, { nullable: true })
   seasons?: number;
+
+  @Field(() => Int, { nullable: true })
+  typeId?: number;
 }
 
 export default UpdateSerieInput;

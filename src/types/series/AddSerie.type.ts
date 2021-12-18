@@ -10,6 +10,9 @@ class AddSerieInput {
 
   @Field(() => Int)
   seasons!: number;
+
+  @Field(() => Int, { nullable: true })
+  typeId!: number;
 }
 
 export default AddSerieInput;

@@ -4,13 +4,16 @@ import {
   Column,
   Entity,
   ManyToMany,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { IEpisode, ISerie } from '../interfaces/index.js';
+import Episode from './Episode.model.js';
 import Type from './Type.model.js';
 
 @Entity()
 @ObjectType()
-class Serie extends BaseEntity {
+class Serie extends BaseEntity implements ISerie {
   @PrimaryGeneratedColumn()
   @Field(() => ID)
   id?: number;
@@ -26,6 +29,10 @@ class Serie extends BaseEntity {
   @Column()
   @Field(() => Int, { nullable: true })
   seasons?: number;
+
+  @OneToMany('Episode', 'serie')
+  @Field(() => [Episode], { nullable: true })
+  episodes?: IEpisode[];
 
   @ManyToMany(() => Type, (type) => type.series)
   @Field(() => [Type], { nullable: true })

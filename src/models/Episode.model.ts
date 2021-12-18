@@ -1,9 +1,18 @@
 import { Field, ID, Int, ObjectType } from 'type-graphql';
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { IEpisode, ISerie } from '../interfaces/index.js';
+
+import Serie from './Series.model.js';
 
 @Entity()
 @ObjectType()
-class Episode extends BaseEntity {
+class Episode extends BaseEntity implements IEpisode {
   @PrimaryGeneratedColumn()
   @Field(() => ID)
   id?: number;
@@ -19,6 +28,10 @@ class Episode extends BaseEntity {
   @Column({ type: 'text' })
   @Field({ nullable: true })
   content?: string;
+
+  @ManyToOne('Serie', 'episodes')
+  @Field(() => Serie, { nullable: true })
+  serie?: ISerie;
 }
 
 export default Episode;

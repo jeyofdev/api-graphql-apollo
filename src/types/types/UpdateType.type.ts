@@ -7,9 +7,6 @@ class UpdateTypeInput {
 
   @Field({ nullable: true })
   title?: string;
-
-  @Field(() => Int, { nullable: true })
-  serieId?: number;
 }
 
 export default UpdateTypeInput;

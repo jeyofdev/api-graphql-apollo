@@ -10,6 +10,9 @@ class AddEpisodeInput {
 
   @Field()
   content!: string;
+
+  @Field(() => Int)
+  serieId!: number;
 }
 
 export default AddEpisodeInput;
